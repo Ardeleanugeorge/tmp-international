@@ -59,6 +59,7 @@ body {
     flex-direction: column;
     gap: 4px;
     align-items: center;
+    justify-content: center;
 }
 
 .top-bar-left {
@@ -1338,11 +1339,7 @@ body {
 
     .top-bar .container {
         flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .top-bar-right {
-        width: auto;
+        justify-content: center;
     }
 
     .mobile-menu-toggle {
