@@ -343,7 +343,7 @@ body {
 
 /* Hero Intro Section */
 .hero-intro {
-    padding: 60px 0;
+    padding: 280px 0 60px 0;
     background: rgba(245, 245, 245, 0.3);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -421,6 +421,7 @@ body {
     -webkit-backdrop-filter: blur(5px);
     position: relative;
     z-index: 1;
+    margin-top: 0;
 }
 
 .features-layout {
