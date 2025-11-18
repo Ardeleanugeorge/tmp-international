@@ -423,28 +423,115 @@ body {
     z-index: 1;
 }
 
-.features-grid {
+.features-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* GPS Tracking Box - Left Side */
+.gps-tracking-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gps-title {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    align-items: center;
+    gap: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.gps-title-bar {
+    width: 4px;
+    height: 40px;
+    background: #ffd700;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.gps-description {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+}
+
+.gps-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.gps-form label {
+    color: var(--white);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.gps-form input {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    background: var(--white);
+    font-size: 1rem;
+    color: var(--text-color);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.gps-form input:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}
+
+.gps-track-btn {
+    padding: 14px 30px;
+    background: #ffd700;
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-transform: uppercase;
+}
+
+.gps-track-btn:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+}
+
+/* Features Right Side */
+.features-right {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    overflow-x: auto;
-    padding: 10px 0;
 }
 
 .feature-box {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    flex: 0 0 auto;
-    min-width: 280px;
-    max-width: 350px;
 }
 
 .feature-box:hover {
@@ -454,32 +541,30 @@ body {
 }
 
 .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-    display: flex;
-    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #ffd700;
+    display: inline-flex;
     align-items: center;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    background: rgba(26, 115, 232, 0.1);
-    border-radius: 50%;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border-radius: 0;
     transition: all 0.3s;
 }
 
 .feature-box:hover .feature-icon {
-    background: var(--primary-color);
-    color: var(--white);
     transform: scale(1.1);
 }
 
 .feature-box h3 {
     color: var(--white);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .feature-box p {
@@ -487,7 +572,8 @@ body {
     font-size: 0.9rem;
     line-height: 1.6;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    font-weight: bold;
+    font-weight: 400;
+    margin: 0;
 }
 
 /* Servicii Section */
@@ -1315,13 +1401,8 @@ body {
         justify-content: center;
     }
 
-    .features-grid {
-        flex-wrap: wrap;
-    }
-    
-    .feature-box {
-        min-width: calc(50% - 10px);
-        max-width: calc(50% - 10px);
+    .features-layout {
+        grid-template-columns: 1fr;
     }
 
     .servicii-grid {
@@ -1389,14 +1470,6 @@ body {
         font-size: 1.4rem;
     }
 
-    .features-grid {
-        flex-wrap: wrap;
-    }
-    
-    .feature-box {
-        min-width: calc(33.333% - 14px);
-        max-width: calc(33.333% - 14px);
-    }
 
     .servicii-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1433,15 +1506,6 @@ body {
 
 /* Large Desktop */
 @media (min-width: 1200px) {
-    .features-grid {
-        flex-wrap: nowrap;
-    }
-    
-    .feature-box {
-        min-width: auto;
-        max-width: none;
-        flex: 1 1 0;
-    }
 }
 
 /* Animations */
