@@ -341,13 +341,15 @@ body {
     }
 }
 
-.hero-content {
+/* Hero Intro Section */
+.hero-intro {
+    padding: 60px 0;
+    background: rgba(245, 245, 245, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
-    color: var(--white);
-    width: 100%;
-    padding: 20px;
 }
 
 .hero-title {
@@ -355,14 +357,16 @@ body {
     font-weight: 700;
     margin-bottom: 15px;
     line-height: 1.3;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 .hero-subtitle {
     font-size: 1rem;
     margin-bottom: 25px;
-    opacity: 0.95;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    font-weight: 500;
 }
 
 .hero-buttons {
