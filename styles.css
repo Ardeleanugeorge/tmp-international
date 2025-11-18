@@ -153,8 +153,9 @@ body {
 
 .header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .logo-img {
@@ -437,7 +438,7 @@ body {
 
 .features-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 30px;
     align-items: start;
 }
@@ -1414,7 +1415,7 @@ body {
     }
 
     .features-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .servicii-grid {
