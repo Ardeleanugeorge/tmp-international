@@ -290,64 +290,132 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
 const heroVideo = document.getElementById('heroVideo');
 const videoPlayBtn = document.getElementById('videoPlayBtn');
 
+// Detect if mobile device
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 if (heroVideo) {
     // Ensure video attributes for mobile
     heroVideo.setAttribute('playsinline', '');
     heroVideo.setAttribute('webkit-playsinline', '');
     heroVideo.setAttribute('muted', '');
     heroVideo.setAttribute('preload', 'auto');
+    heroVideo.muted = true;
+    heroVideo.volume = 0;
     
-    // Try to play video automatically
-    const playPromise = heroVideo.play();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            // Video started playing, hide play button
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'none';
-            }
-        }).catch(error => {
-            console.log('Video autoplay prevented:', error);
-            // Show play button if autoplay fails
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'flex';
-            }
-        });
+    // Load video first
+    heroVideo.load();
+    
+    // For mobile, always show play button initially
+    if (isMobile && videoPlayBtn) {
+        videoPlayBtn.style.display = 'flex';
+    }
+    
+    // Try to play video automatically (works on desktop)
+    if (!isMobile) {
+        const playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Video started playing, hide play button
+                if (videoPlayBtn) {
+                    videoPlayBtn.style.display = 'none';
+                }
+            }).catch(error => {
+                console.log('Video autoplay prevented:', error);
+                // Show play button if autoplay fails
+                if (videoPlayBtn) {
+                    videoPlayBtn.style.display = 'flex';
+                }
+            });
+        }
     }
     
     // Manual play button for mobile
     if (videoPlayBtn) {
-        videoPlayBtn.addEventListener('click', function() {
-            heroVideo.play().then(() => {
-                this.style.display = 'none';
-            }).catch(error => {
-                console.log('Error playing video:', error);
-            });
+        // Click event
+        videoPlayBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            heroVideo.muted = true;
+            heroVideo.volume = 0;
+            
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    this.style.display = 'none';
+                }).catch(error => {
+                    console.log('Error playing video:', error);
+                    alert('Te rugăm să apesi play manual pe video pentru a-l porni.');
+                });
+            }
+        });
+        
+        // Touch event for better mobile support
+        videoPlayBtn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            heroVideo.muted = true;
+            heroVideo.volume = 0;
+            
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    this.style.display = 'none';
+                }).catch(error => {
+                    console.log('Error playing video:', error);
+                });
+            }
         });
         
         // Hide button when video starts playing
         heroVideo.addEventListener('play', function() {
-            videoPlayBtn.style.display = 'none';
+            if (videoPlayBtn) {
+                videoPlayBtn.style.display = 'none';
+            }
         });
         
         // Show button if video is paused
         heroVideo.addEventListener('pause', function() {
-            if (!heroVideo.ended) {
+            if (!heroVideo.ended && videoPlayBtn) {
+                videoPlayBtn.style.display = 'flex';
+            }
+        });
+        
+        // Show button if video fails to load
+        heroVideo.addEventListener('error', function() {
+            if (videoPlayBtn) {
                 videoPlayBtn.style.display = 'flex';
             }
         });
     }
+    
+    // Also allow direct tap on video to play (for mobile)
+    heroVideo.addEventListener('click', function() {
+        if (this.paused) {
+            this.muted = true;
+            this.volume = 0;
+            this.play().catch(() => {
+                if (videoPlayBtn) {
+                    videoPlayBtn.style.display = 'flex';
+                }
+            });
+        }
+    });
     
     // Handle visibility change (when user switches tabs)
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
             heroVideo.pause();
         } else {
-            heroVideo.play().catch(() => {
-                // Autoplay blocked, show play button
-                if (videoPlayBtn) {
-                    videoPlayBtn.style.display = 'flex';
-                }
-            });
+            if (!isMobile) {
+                heroVideo.play().catch(() => {
+                    // Autoplay blocked, show play button
+                    if (videoPlayBtn) {
+                        videoPlayBtn.style.display = 'flex';
+                    }
+                });
+            }
         }
     });
 }

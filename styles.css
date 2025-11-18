@@ -275,6 +275,9 @@ body {
     object-fit: cover;
     object-position: center center;
     transform: translate(-50%, -50%);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    pointer-events: auto;
 }
 
 .video-overlay {
@@ -295,8 +298,9 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: rgba(26, 115, 232, 0.9);
+    background: rgba(26, 115, 232, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 3px solid var(--white);
     color: var(--white);
     font-size: 2rem;
@@ -306,7 +310,9 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .video-play-button:hover {
