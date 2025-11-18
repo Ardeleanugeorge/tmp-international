@@ -351,6 +351,28 @@ body {
         height: 70px;
         font-size: 1.8rem;
     }
+    
+    .header .container {
+        justify-content: center;
+    }
+    
+    .mobile-menu-toggle {
+        position: absolute;
+        right: 15px;
+    }
+    
+    .features-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .gps-tracking-box {
+        padding: 25px;
+    }
+    
+    .gps-title {
+        font-size: 1.5rem;
+    }
 }
 
 /* Hero Intro Section */
