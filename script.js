@@ -286,185 +286,85 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
     });
 });
 
-// Video/GIF autoplay handling for mobile
+// Force video autoplay on mobile
 const heroVideo = document.getElementById('heroVideo');
-const heroGif = document.getElementById('heroGif');
-const videoPlayBtn = document.getElementById('videoPlayBtn');
-
-// Detect if mobile device
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-// Use GIF on mobile for guaranteed autoplay, video on desktop
-if (isMobile && heroGif) {
-    // Hide video, show GIF on mobile
-    if (heroVideo) {
-        heroVideo.style.display = 'none';
-    }
-    heroGif.style.display = 'block';
-    // GIF plays automatically, no need for play button
-    if (videoPlayBtn) {
-        videoPlayBtn.style.display = 'none';
-    }
-} else if (heroVideo) {
-    // Use video on desktop
-    if (heroGif) {
-        heroGif.style.display = 'none';
-    }
-    heroVideo.style.display = 'block';
-}
-
-// Flag to track if video has been started
-let videoStarted = false;
-
-// Function to start video
-function startVideo() {
-    if (videoStarted || !heroVideo) return;
-    
-    heroVideo.muted = true;
-    heroVideo.volume = 0;
-    heroVideo.setAttribute('muted', '');
-    
-    const playPromise = heroVideo.play();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            videoStarted = true;
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'none';
-            }
-        }).catch(error => {
-            console.log('Video play error:', error);
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'flex';
-            }
-        });
-    }
-}
 
 if (heroVideo) {
-    // Ensure video attributes for mobile
+    // Set all required attributes for mobile autoplay
     heroVideo.setAttribute('playsinline', '');
     heroVideo.setAttribute('webkit-playsinline', '');
     heroVideo.setAttribute('muted', '');
     heroVideo.setAttribute('autoplay', '');
+    heroVideo.setAttribute('loop', '');
     heroVideo.setAttribute('preload', 'auto');
     heroVideo.muted = true;
     heroVideo.volume = 0;
+    heroVideo.playsInline = true;
     
-    // Load video first
+    // Force load and play
     heroVideo.load();
     
-    // Hide play button initially
-    if (videoPlayBtn) {
-        videoPlayBtn.style.display = 'none';
-    }
-    
-    // Try to play video automatically (works on desktop and some mobile)
-    const playPromise = heroVideo.play();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            videoStarted = true;
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'none';
-            }
-        }).catch(error => {
-            console.log('Autoplay prevented, will start on user interaction:', error);
-            // Video will start on first user interaction
-        });
-    }
-    
-    // Start video on first user interaction (touch, scroll, click)
-    const startVideoOnInteraction = () => {
-        if (!videoStarted) {
-            startVideo();
-            // Remove listeners after first interaction
-            document.removeEventListener('touchstart', startVideoOnInteraction);
-            document.removeEventListener('touchend', startVideoOnInteraction);
-            document.removeEventListener('click', startVideoOnInteraction);
-            document.removeEventListener('scroll', startVideoOnInteraction);
-            window.removeEventListener('scroll', startVideoOnInteraction);
+    // Multiple attempts to play video
+    const forcePlay = () => {
+        heroVideo.muted = true;
+        heroVideo.volume = 0;
+        const playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Retry after a short delay
+                setTimeout(() => {
+                    heroVideo.play().catch(() => {});
+                }, 100);
+            });
         }
     };
     
-    // Add multiple event listeners for first interaction
-    document.addEventListener('touchstart', startVideoOnInteraction, { once: true, passive: true });
-    document.addEventListener('touchend', startVideoOnInteraction, { once: true, passive: true });
-    document.addEventListener('click', startVideoOnInteraction, { once: true });
-    document.addEventListener('scroll', startVideoOnInteraction, { once: true, passive: true });
-    window.addEventListener('scroll', startVideoOnInteraction, { once: true, passive: true });
+    // Try to play immediately
+    forcePlay();
     
-    // Also try to start on page load after a short delay (for some browsers)
-    setTimeout(() => {
-        if (!videoStarted) {
-            startVideo();
+    // Try after video is loaded
+    heroVideo.addEventListener('loadeddata', forcePlay);
+    heroVideo.addEventListener('canplay', forcePlay);
+    heroVideo.addEventListener('canplaythrough', forcePlay);
+    
+    // Try on any user interaction (touch, scroll, click, etc.)
+    const startOnInteraction = () => {
+        forcePlay();
+        // Remove listeners after first successful play
+        heroVideo.addEventListener('play', () => {
+            document.removeEventListener('touchstart', startOnInteraction);
+            document.removeEventListener('touchend', startOnInteraction);
+            document.removeEventListener('click', startOnInteraction);
+            document.removeEventListener('scroll', startOnInteraction);
+            window.removeEventListener('scroll', startOnInteraction);
+        }, { once: true });
+    };
+    
+    // Add listeners for user interaction
+    document.addEventListener('touchstart', startOnInteraction, { once: true, passive: true });
+    document.addEventListener('touchend', startOnInteraction, { once: true, passive: true });
+    document.addEventListener('click', startOnInteraction, { once: true });
+    document.addEventListener('scroll', startOnInteraction, { once: true, passive: true });
+    window.addEventListener('scroll', startOnInteraction, { once: true, passive: true });
+    
+    // Try multiple times with delays
+    setTimeout(forcePlay, 100);
+    setTimeout(forcePlay, 300);
+    setTimeout(forcePlay, 500);
+    setTimeout(forcePlay, 1000);
+    
+    // Keep trying to play if paused
+    setInterval(() => {
+        if (heroVideo.paused && heroVideo.readyState >= 2) {
+            heroVideo.muted = true;
+            heroVideo.play().catch(() => {});
         }
-    }, 500);
+    }, 2000);
     
-    // Manual play button (fallback only)
-    if (videoPlayBtn) {
-        // Click event
-        videoPlayBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            startVideo();
-        });
-        
-        // Touch event for better mobile support
-        videoPlayBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            startVideo();
-        });
-        
-        // Hide button when video starts playing
-        heroVideo.addEventListener('play', function() {
-            videoStarted = true;
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'none';
-            }
-        });
-        
-        // Show button if video is paused (but only if not started yet)
-        heroVideo.addEventListener('pause', function() {
-            if (!heroVideo.ended && !videoStarted && videoPlayBtn) {
-                videoPlayBtn.style.display = 'flex';
-            }
-        });
-        
-        // Show button if video fails to load
-        heroVideo.addEventListener('error', function() {
-            if (videoPlayBtn) {
-                videoPlayBtn.style.display = 'flex';
-            }
-        });
-    }
-    
-    // Also allow direct tap on video to play (for mobile)
-    heroVideo.addEventListener('click', function() {
-        if (this.paused) {
-            startVideo();
-        }
-    });
-    
-    // Start video on any touch on the page
-    heroVideo.addEventListener('touchstart', function() {
-        if (!videoStarted) {
-            startVideo();
-        }
-    }, { once: true });
-    
-    // Handle visibility change (when user switches tabs)
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            heroVideo.pause();
-        } else {
-            if (!isMobile) {
-                heroVideo.play().catch(() => {
-                    // Autoplay blocked, show play button
-                    if (videoPlayBtn) {
-                        videoPlayBtn.style.display = 'flex';
-                    }
-                });
-            }
+    // Handle visibility change
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && heroVideo.paused) {
+            forcePlay();
         }
     });
 }
