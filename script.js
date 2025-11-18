@@ -286,12 +286,32 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
     });
 });
 
-// Video autoplay handling for mobile
+// Video/GIF autoplay handling for mobile
 const heroVideo = document.getElementById('heroVideo');
+const heroGif = document.getElementById('heroGif');
 const videoPlayBtn = document.getElementById('videoPlayBtn');
 
 // Detect if mobile device
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Use GIF on mobile for guaranteed autoplay, video on desktop
+if (isMobile && heroGif) {
+    // Hide video, show GIF on mobile
+    if (heroVideo) {
+        heroVideo.style.display = 'none';
+    }
+    heroGif.style.display = 'block';
+    // GIF plays automatically, no need for play button
+    if (videoPlayBtn) {
+        videoPlayBtn.style.display = 'none';
+    }
+} else if (heroVideo) {
+    // Use video on desktop
+    if (heroGif) {
+        heroGif.style.display = 'none';
+    }
+    heroVideo.style.display = 'block';
+}
 
 // Flag to track if video has been started
 let videoStarted = false;
