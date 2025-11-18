@@ -424,9 +424,12 @@ body {
 }
 
 .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
 }
 
 .feature-box {
@@ -439,6 +442,9 @@ body {
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto;
+    min-width: 280px;
+    max-width: 350px;
 }
 
 .feature-box:hover {
@@ -1310,7 +1316,12 @@ body {
     }
 
     .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+        flex-wrap: wrap;
+    }
+    
+    .feature-box {
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
     }
 
     .servicii-grid {
@@ -1379,7 +1390,12 @@ body {
     }
 
     .features-grid {
-        grid-template-columns: repeat(3, 1fr);
+        flex-wrap: wrap;
+    }
+    
+    .feature-box {
+        min-width: calc(33.333% - 14px);
+        max-width: calc(33.333% - 14px);
     }
 
     .servicii-grid {
@@ -1418,7 +1434,13 @@ body {
 /* Large Desktop */
 @media (min-width: 1200px) {
     .features-grid {
-        grid-template-columns: repeat(6, 1fr);
+        flex-wrap: nowrap;
+    }
+    
+    .feature-box {
+        min-width: auto;
+        max-width: none;
+        flex: 1 1 0;
     }
 }
 
