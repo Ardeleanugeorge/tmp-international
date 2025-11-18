@@ -54,12 +54,39 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Header scroll effect - stays transparent
+// Header scroll effect - hide on scroll down, show on scroll up
 const header = document.querySelector('.header');
+let lastScrollTop = 0;
+let scrollTimeout;
+
 if (header) {
     window.addEventListener('scroll', () => {
-        // Header rămâne transparent, doar se fixează la scroll
-        if (window.pageYOffset > 100) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Clear timeout
+        clearTimeout(scrollTimeout);
+        
+        // Show header at top of page
+        if (scrollTop < 50) {
+            header.classList.remove('hidden');
+            header.classList.add('scrolled');
+            return;
+        }
+        
+        // Hide header when scrolling down
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.classList.add('hidden');
+        } 
+        // Show header when scrolling up
+        else if (scrollTop < lastScrollTop) {
+            header.classList.remove('hidden');
+            header.classList.add('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+        
+        // Add scrolled class for styling
+        if (scrollTop > 100) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
