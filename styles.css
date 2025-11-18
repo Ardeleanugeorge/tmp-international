@@ -58,15 +58,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .top-bar-left {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
