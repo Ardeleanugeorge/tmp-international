@@ -287,19 +287,69 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
 });
 
 // Video autoplay handling for mobile
-const heroVideo = document.querySelector('.hero-video');
+const heroVideo = document.getElementById('heroVideo');
+const videoPlayBtn = document.getElementById('videoPlayBtn');
+
 if (heroVideo) {
-    // Ensure video plays on mobile
+    // Ensure video attributes for mobile
     heroVideo.setAttribute('playsinline', '');
+    heroVideo.setAttribute('webkit-playsinline', '');
     heroVideo.setAttribute('muted', '');
+    heroVideo.setAttribute('preload', 'auto');
     
-    // Try to play video
+    // Try to play video automatically
     const playPromise = heroVideo.play();
     if (playPromise !== undefined) {
-        playPromise.catch(error => {
+        playPromise.then(() => {
+            // Video started playing, hide play button
+            if (videoPlayBtn) {
+                videoPlayBtn.style.display = 'none';
+            }
+        }).catch(error => {
             console.log('Video autoplay prevented:', error);
+            // Show play button if autoplay fails
+            if (videoPlayBtn) {
+                videoPlayBtn.style.display = 'flex';
+            }
         });
     }
+    
+    // Manual play button for mobile
+    if (videoPlayBtn) {
+        videoPlayBtn.addEventListener('click', function() {
+            heroVideo.play().then(() => {
+                this.style.display = 'none';
+            }).catch(error => {
+                console.log('Error playing video:', error);
+            });
+        });
+        
+        // Hide button when video starts playing
+        heroVideo.addEventListener('play', function() {
+            videoPlayBtn.style.display = 'none';
+        });
+        
+        // Show button if video is paused
+        heroVideo.addEventListener('pause', function() {
+            if (!heroVideo.ended) {
+                videoPlayBtn.style.display = 'flex';
+            }
+        });
+    }
+    
+    // Handle visibility change (when user switches tabs)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            heroVideo.pause();
+        } else {
+            heroVideo.play().catch(() => {
+                // Autoplay blocked, show play button
+                if (videoPlayBtn) {
+                    videoPlayBtn.style.display = 'flex';
+                }
+            });
+        }
+    });
 }
 
 // Prevent default touch behaviors that might interfere

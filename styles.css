@@ -287,6 +287,45 @@ body {
     z-index: 1;
 }
 
+.video-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(26, 115, 232, 0.9);
+    backdrop-filter: blur(10px);
+    border: 3px solid var(--white);
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 4;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-play-button:hover {
+    background: rgba(21, 87, 176, 0.95);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-play-button:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .video-play-button {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+}
+
 .hero-content {
     position: relative;
     z-index: 2;

@@ -51,11 +51,14 @@
             </div>
         </header>
         <div class="video-wrapper">
-            <video autoplay muted loop playsinline class="hero-video">
+            <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline class="hero-video" preload="auto">
                 <source src="Transconnect-Movie-Final.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="video-overlay"></div>
+            <button class="video-play-button" id="videoPlayBtn" aria-label="Play video">
+                <i class="fas fa-play"></i>
+            </button>
         </div>
         <div class="hero-content">
             <div class="container">
