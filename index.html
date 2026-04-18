@@ -9,7 +9,7 @@
     <title>TMP International - Transport Auto Romania-Germania-Romania | Tractari Auto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=2.0">
+    <link rel="stylesheet" href="styles.css?v=2.1">
 </head>
 <body>
     <!-- Hero Section with Video -->
@@ -119,64 +119,94 @@
             
             <div class="servicii-grid">
                 <div class="serviciu-card">
-                    <div class="serviciu-image">
-                        <img src="img/servicii-transport-auto.jpg" alt="Transport Auto pe platforma">
+                    <div class="serviciu-card-visual">
+                        <div class="serviciu-image">
+                            <img src="img/servicii-transport-auto.jpg" alt="Transport Auto pe platforma">
+                        </div>
+                        <button type="button" class="serviciu-toggle-btn" id="serviciu-btn-transport" aria-expanded="false" aria-controls="serviciu-panel-transport">
+                            <span class="serviciu-toggle-label">Detalii</span>
+                            <i class="fas fa-chevron-down serviciu-toggle-icon" aria-hidden="true"></i>
+                        </button>
                     </div>
-                    <div class="serviciu-icon-wrapper">
-                        <i class="fas fa-truck-moving"></i>
+                    <div class="serviciu-details" id="serviciu-panel-transport" role="region" aria-labelledby="serviciu-btn-transport" hidden>
+                        <div class="serviciu-details-inner">
+                            <div class="serviciu-icon-wrapper" aria-hidden="true">
+                                <i class="fas fa-truck-moving"></i>
+                            </div>
+                            <h3>Transport Auto</h3>
+                            <p class="serviciu-subtitle">Transport auto international si local non-stop</p>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Transport de la adresa la adresa</li>
+                                <li><i class="fas fa-check"></i> Platforma de 9 Pozitii</li>
+                                <li><i class="fas fa-check"></i> Romania - Germania - Romania</li>
+                                <li><i class="fas fa-check"></i> Curse saptamanale</li>
+                                <li><i class="fas fa-check"></i> Transport International</li>
+                                <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
+                                <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
+                            </ul>
+                            <a href="#contact" class="serviciu-contact-link">Solicitați o cotație</a>
+                        </div>
                     </div>
-                    <h3>Transport Auto</h3>
-                    <p class="serviciu-subtitle">Transport auto international si local non-stop</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Transport de la adresa la adresa</li>
-                        <li><i class="fas fa-check"></i> Platforma de 9 Pozitii</li>
-                        <li><i class="fas fa-check"></i> Romania - Germania - Romania</li>
-                        <li><i class="fas fa-check"></i> Curse saptamanale</li>
-                        <li><i class="fas fa-check"></i> Transport International</li>
-                        <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
-                        <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
-                    </ul>
-                    <a href="#contact" class="serviciu-btn">Detalii <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <div class="serviciu-card">
-                    <div class="serviciu-image">
-                        <img src="img/servicii-tractari.jpg" alt="Tractari Auto">
+                    <div class="serviciu-card-visual">
+                        <div class="serviciu-image">
+                            <img src="img/servicii-tractari.jpg" alt="Tractari Auto">
+                        </div>
+                        <button type="button" class="serviciu-toggle-btn" id="serviciu-btn-tractari" aria-expanded="false" aria-controls="serviciu-panel-tractari">
+                            <span class="serviciu-toggle-label">Detalii</span>
+                            <i class="fas fa-chevron-down serviciu-toggle-icon" aria-hidden="true"></i>
+                        </button>
                     </div>
-                    <div class="serviciu-icon-wrapper">
-                        <i class="fas fa-tools"></i>
+                    <div class="serviciu-details" id="serviciu-panel-tractari" role="region" aria-labelledby="serviciu-btn-tractari" hidden>
+                        <div class="serviciu-details-inner">
+                            <div class="serviciu-icon-wrapper" aria-hidden="true">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Tractari Auto</h3>
+                            <p class="serviciu-subtitle">Tractari auto non-stop, la standarde Europene</p>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Transport de la adresa la adresa</li>
+                                <li><i class="fas fa-check"></i> Masini premium dotate cu troliu electric</li>
+                                <li><i class="fas fa-check"></i> Soferi cu experienta</li>
+                                <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
+                                <li><i class="fas fa-check"></i> 9 pozitii</li>
+                                <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
+                            </ul>
+                            <a href="#contact" class="serviciu-contact-link">Solicitați o cotație</a>
+                        </div>
                     </div>
-                    <h3>Tractari Auto</h3>
-                    <p class="serviciu-subtitle">Tractari auto non-stop, la standarde Europene</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Transport de la adresa la adresa</li>
-                        <li><i class="fas fa-check"></i> Masini premium dotate cu troliu electric</li>
-                        <li><i class="fas fa-check"></i> Soferi cu experienta</li>
-                        <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
-                        <li><i class="fas fa-check"></i> 9 pozitii</li>
-                        <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
-                    </ul>
-                    <a href="#contact" class="serviciu-btn">Detalii <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <div class="serviciu-card">
-                    <div class="serviciu-image">
-                        <img src="img/servicii-transport-special.jpg" alt="Transport Special">
+                    <div class="serviciu-card-visual">
+                        <div class="serviciu-image">
+                            <img src="img/servicii-transport-special.jpg" alt="Transport Special">
+                        </div>
+                        <button type="button" class="serviciu-toggle-btn" id="serviciu-btn-special" aria-expanded="false" aria-controls="serviciu-panel-special">
+                            <span class="serviciu-toggle-label">Detalii</span>
+                            <i class="fas fa-chevron-down serviciu-toggle-icon" aria-hidden="true"></i>
+                        </button>
                     </div>
-                    <div class="serviciu-icon-wrapper">
-                        <i class="fas fa-truck"></i>
+                    <div class="serviciu-details" id="serviciu-panel-special" role="region" aria-labelledby="serviciu-btn-special" hidden>
+                        <div class="serviciu-details-inner">
+                            <div class="serviciu-icon-wrapper" aria-hidden="true">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3>Transport Special</h3>
+                            <p class="serviciu-subtitle">Transport Dube si utilaje</p>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Transport Dube</li>
+                                <li><i class="fas fa-check"></i> Siguranta si rapiditate</li>
+                                <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
+                                <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
+                                <li><i class="fas fa-check"></i> Platforme noi autorizate RAR</li>
+                                <li><i class="fas fa-check"></i> Maxim 1 an vechime</li>
+                            </ul>
+                            <a href="#contact" class="serviciu-contact-link">Solicitați o cotație</a>
+                        </div>
                     </div>
-                    <h3>Transport Special</h3>
-                    <p class="serviciu-subtitle">Transport Dube si utilaje</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Transport Dube</li>
-                        <li><i class="fas fa-check"></i> Siguranta si rapiditate</li>
-                        <li><i class="fas fa-check"></i> Preturi foarte avantajoase</li>
-                        <li><i class="fas fa-check"></i> Asigurare CMR 300.000 Euro</li>
-                        <li><i class="fas fa-check"></i> Platforme noi autorizate RAR</li>
-                        <li><i class="fas fa-check"></i> Maxim 1 an vechime</li>
-                    </ul>
-                    <a href="#contact" class="serviciu-btn">Detalii <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -234,6 +264,9 @@
             <h2 class="section-title">Galerie Foto</h2>
             <p class="section-subtitle">Vezi flota noastra si serviciile noastre in actiune</p>
             <div class="galerie-grid" id="galerie-grid">
+                <div class="galerie-item">
+                    <img src="img/galerie-01.jpg" alt="TMP International - Galerie foto">
+                </div>
             </div>
         </div>
     </section>
