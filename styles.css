@@ -701,6 +701,8 @@ body {
     font-size: clamp(0.88rem, 2.3vw, 0.98rem);
     font-weight: 600;
     line-height: 1.45;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
     display: -webkit-box;
     -webkit-box-orient: vertical;
