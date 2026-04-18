@@ -15,6 +15,10 @@
     --white: #ffffff;
     --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 5px 20px rgba(0, 0, 0, 0.15);
+    /* Fundal: filmulet fix full-screen + aceasta transparență peste video (pastreaza la redesign) */
+    --hero-video-overlay: rgba(0, 0, 0, 0.5);
+    /* Prima bandă de conținut peste video: sticlă ușoară peste film */
+    --hero-intro-glass: rgba(245, 245, 245, 0.3);
 }
 
 html {
@@ -262,7 +266,7 @@ body {
     color: var(--white);
 }
 
-/* Hero Section with Video */
+/* Hero: filmulet Transconnect-Movie-Final.mp4 fix in fundal (z-index 0), vizibil pe tot scroll-ul */
 .hero {
     position: relative;
     height: 100vh;
@@ -307,7 +311,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--hero-video-overlay);
     z-index: 1;
 }
 
@@ -366,7 +370,7 @@ body {
 /* Hero Intro Section */
 .hero-intro {
     padding: 280px 0 60px 0;
-    background: rgba(245, 245, 245, 0.3);
+    background: var(--hero-intro-glass);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     position: relative;
@@ -574,37 +578,45 @@ body {
 .servicii-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
-    align-items: stretch;
+    gap: clamp(18px, 4vw, 28px);
+    align-items: start;
 }
 
 .serviciu-card {
     display: flex;
     flex-direction: column;
-    height: 100%;
     position: relative;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0;
+    overflow: hidden;
+    border-radius: clamp(12px, 2.5vw, 18px);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .serviciu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+}
+
+.serviciu-card-visual {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .serviciu-image {
     width: 100%;
-    height: 200px;
+    height: clamp(220px, 52vw, 460px);
+    min-height: 220px;
     overflow: hidden;
-    border-radius: 10px 10px 0 0;
-    margin: -25px -25px 20px -25px;
+    margin: 0;
+    border-radius: 0;
     position: relative;
 }
 
@@ -612,104 +624,162 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
+    object-position: center;
+    display: block;
+    transition: transform 0.45s ease;
 }
 
 .serviciu-card:hover .serviciu-image img {
-    transform: scale(1.05);
+    transform: scale(1.04);
+}
+
+.serviciu-toggle-btn {
+    position: relative;
+    align-self: center;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    margin: clamp(12px, 2.5vw, 16px) clamp(14px, 3vw, 20px) clamp(14px, 2.5vw, 18px);
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--primary-color);
+    font-size: clamp(0.9rem, 2.4vw, 1rem);
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    transition: background 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    max-width: min(100% - 28px, 300px);
+    width: auto;
+}
+
+.serviciu-toggle-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 6px 24px rgba(26, 115, 232, 0.45);
+}
+
+.serviciu-toggle-btn:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 3px;
+}
+
+.serviciu-toggle-label {
+    min-width: 4.5rem;
+    text-align: center;
+}
+
+.serviciu-toggle-icon {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.serviciu-card.is-open .serviciu-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.serviciu-details {
+    flex-shrink: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.serviciu-details-inner {
+    padding: clamp(18px, 4vw, 26px) clamp(16px, 4vw, 24px) clamp(22px, 4vw, 28px);
 }
 
 .serviciu-icon-wrapper {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 60px;
-    height: 60px;
+    position: static;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
     background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    transition: all 0.3s;
+    font-size: 1.35rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, background 0.3s;
 }
 
-.serviciu-card:hover .serviciu-icon-wrapper {
-    transform: scale(1.1) rotate(5deg);
+.serviciu-card.is-open .serviciu-icon-wrapper {
     background: var(--secondary-color);
 }
 
 .serviciu-card h3 {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 3.5vw, 1.55rem);
     margin-bottom: 10px;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    text-shadow: none;
     font-weight: 700;
 }
 
 .serviciu-subtitle {
     text-align: center;
     color: var(--text-color);
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+    font-size: clamp(0.85rem, 2.3vw, 0.95rem);
+    margin-bottom: 16px;
     font-style: italic;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    text-shadow: none;
     font-weight: 500;
 }
 
-.serviciu-card ul {
+.serviciu-details ul {
     list-style: none;
-    margin-bottom: 0;
-    flex: 1 1 auto;
+    margin: 0 0 4px;
+    padding: 0;
 }
 
-.serviciu-card ul li {
+.serviciu-details ul li {
     padding: 8px 0;
-    padding-left: 25px;
+    padding-left: 26px;
     position: relative;
     color: var(--text-color);
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+    font-size: clamp(0.85rem, 2.2vw, 0.92rem);
+    text-shadow: none;
     font-weight: 500;
 }
 
-.serviciu-card ul li i {
+.serviciu-details ul li i {
     position: absolute;
     left: 0;
+    top: 0.55rem;
     color: var(--secondary-color);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
-.serviciu-btn {
+.serviciu-contact-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 12px 22px;
+    border-radius: 999px;
     background: var(--primary-color);
     color: var(--white);
-    padding: 12px 25px;
-    border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
-    transition: background 0.3s, transform 0.3s;
-    margin-top: auto;
+    font-size: clamp(0.9rem, 2.3vw, 1rem);
+    transition: background 0.25s, transform 0.25s;
+    text-align: center;
 }
 
-.serviciu-btn i {
-    transition: transform 0.3s;
-}
-
-.serviciu-btn:hover {
+.serviciu-contact-link:hover {
     background: #1557b0;
     transform: translateY(-2px);
-}
-
-.serviciu-btn:hover i {
-    transform: translateX(5px);
 }
 
 /* Statistics Section */
@@ -1510,7 +1580,8 @@ body {
 
     .cta-primary:hover,
     .cta-secondary:hover,
-    .serviciu-btn:hover {
+    .serviciu-toggle-btn:hover,
+    .serviciu-contact-link:hover {
         transform: none;
     }
 }
@@ -1519,7 +1590,7 @@ body {
 button,
 a.cta-primary,
 a.cta-secondary,
-a.serviciu-btn,
+a.serviciu-contact-link,
 a.quote-btn {
     -webkit-user-select: none;
     -moz-user-select: none;
