@@ -361,18 +361,6 @@ body {
         right: 15px;
     }
     
-    .features-layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .gps-tracking-box {
-        padding: 25px;
-    }
-    
-    .gps-title {
-        font-size: 1.5rem;
-    }
 }
 
 /* Hero Intro Section */
@@ -449,7 +437,7 @@ body {
 
 /* Features Section */
 .features {
-    padding: 40px 0;
+    padding: clamp(28px, 6vw, 48px) 0;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -461,156 +449,77 @@ body {
 .features-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    align-items: start;
-}
-
-/* GPS Tracking Box - Left Side */
-.gps-tracking-box {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.gps-title {
-    color: var(--white);
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.gps-title-bar {
-    width: 4px;
-    height: 40px;
-    background: var(--primary-color);
-    display: inline-block;
-    border-radius: 2px;
-}
-
-.gps-description {
-    color: var(--white);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    font-weight: 500;
-}
-
-.gps-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.gps-form label {
-    color: var(--white);
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-.gps-form input {
-    padding: 12px 15px;
-    border: none;
-    border-radius: 5px;
-    background: var(--white);
-    font-size: 1rem;
-    color: var(--text-color);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.gps-form input:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-.gps-track-btn {
-    padding: 14px 30px;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    text-transform: uppercase;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.gps-track-btn:hover {
-    background: #1557b0;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Features Right Side */
-.features-right {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: clamp(14px, 3.5vw, 22px);
+    align-items: stretch;
 }
 
 .feature-box {
-    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 10px;
+    padding: clamp(18px, 4vw, 28px);
+    border-radius: clamp(10px, 2vw, 14px);
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .feature-box:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.feature-box:hover h3,
+.feature-box:hover p {
+    color: var(--text-color);
+    text-shadow: none;
 }
 
 .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: clamp(10px, 2vw, 14px);
     color: var(--primary-color);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: clamp(52px, 12vw, 64px);
+    height: clamp(52px, 12vw, 64px);
     background: transparent;
     border-radius: 0;
-    transition: all 0.3s;
+    transition: color 0.3s, transform 0.3s;
+    flex-shrink: 0;
 }
 
 .feature-box:hover .feature-icon {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    color: var(--primary-color);
 }
 
 .feature-box h3 {
     color: var(--white);
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+    margin-bottom: clamp(8px, 1.5vw, 12px);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
 }
 
 .feature-box p {
     color: var(--white);
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: clamp(0.85rem, 2.4vw, 0.95rem);
+    line-height: 1.65;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     font-weight: 400;
     margin: 0;
+    flex: 1 1 auto;
 }
 
 /* Servicii Section */
@@ -666,9 +575,14 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
+    align-items: stretch;
 }
 
 .serviciu-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -749,7 +663,8 @@ body {
 
 .serviciu-card ul {
     list-style: none;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    flex: 1 1 auto;
 }
 
 .serviciu-card ul li {
@@ -781,7 +696,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     transition: background 0.3s, transform 0.3s;
-    margin-top: 15px;
+    margin-top: auto;
 }
 
 .serviciu-btn i {
@@ -1441,7 +1356,15 @@ body {
     }
 
     .features-layout {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(16px, 2.5vw, 24px);
+    }
+
+    .feature-box:nth-child(5):last-child {
+        grid-column: 1 / -1;
+        max-width: min(100%, 560px);
+        width: 100%;
+        justify-self: center;
     }
 
     .servicii-grid {
@@ -1512,6 +1435,18 @@ body {
 
     .servicii-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .features-layout {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(18px, 2vw, 26px);
+    }
+
+    .feature-box:nth-child(5):last-child {
+        grid-column: auto;
+        max-width: none;
+        width: auto;
+        justify-self: stretch;
     }
 
     .section-title {
