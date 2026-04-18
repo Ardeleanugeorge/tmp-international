@@ -184,8 +184,8 @@ if (contactForm) {
 
         const formData = {
             tip_transport: tipEl ? tipEl.value : '',
-            plecare: plecareEl ? plecareEl.value : '',
-            destinatie: destEl ? destEl.value : '',
+            plecare: plecareEl ? plecareEl.value.trim() : '',
+            destinatie: destEl ? destEl.value.trim() : '',
             detalii_masina: detaliiEl ? detaliiEl.value.trim() : '',
             data_transport: dataEl ? dataEl.value : '',
             telefon: telEl ? telEl.value.trim() : '',

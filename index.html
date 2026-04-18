@@ -9,7 +9,7 @@
     <title>TMP International - Transport Auto Romania-Germania-Romania | Tractari Auto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=3.8">
+    <link rel="stylesheet" href="styles.css?v=3.9">
 </head>
 <body>
     <!-- Hero Section with Video -->
@@ -370,147 +370,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="plecare">Plecare</label>
-                            <select id="plecare" name="plecare" required>
-                                <option value="">— Țară / oraș —</option>
-                                <optgroup label="România">
-                                    <option value="România – orice locație">Orice locație în România</option>
-                                    <option value="România – București">București</option>
-                                    <option value="România – Cluj-Napoca">Cluj-Napoca</option>
-                                    <option value="România – Timișoara">Timișoara</option>
-                                    <option value="România – Constanța">Constanța</option>
-                                    <option value="România – Sibiu">Sibiu</option>
-                                    <option value="România – Iași">Iași</option>
-                                </optgroup>
-                                <optgroup label="Germania">
-                                    <option value="Germania – orice locație">Orice locație în Germania</option>
-                                    <option value="Germania – Berlin">Berlin</option>
-                                    <option value="Germania – München">München</option>
-                                    <option value="Germania – Hamburg">Hamburg</option>
-                                    <option value="Germania – Frankfurt">Frankfurt</option>
-                                    <option value="Germania – Köln">Köln</option>
-                                    <option value="Germania – Stuttgart">Stuttgart</option>
-                                    <option value="Germania – Dresden">Dresden</option>
-                                </optgroup>
-                                <optgroup label="Olanda">
-                                    <option value="Olanda – orice locație">Orice locație în Olanda</option>
-                                    <option value="Olanda – Amsterdam">Amsterdam</option>
-                                    <option value="Olanda – Rotterdam">Rotterdam</option>
-                                    <option value="Olanda – Utrecht">Utrecht</option>
-                                </optgroup>
-                                <optgroup label="Belgia">
-                                    <option value="Belgia – orice locație">Orice locație în Belgia</option>
-                                    <option value="Belgia – Bruxelles">Bruxelles</option>
-                                    <option value="Belgia – Anvers">Anvers</option>
-                                    <option value="Belgia – Gent">Gent</option>
-                                </optgroup>
-                                <optgroup label="Cehia">
-                                    <option value="Cehia – orice locație">Orice locație în Cehia</option>
-                                    <option value="Cehia – Praga">Praga</option>
-                                    <option value="Cehia – Brno">Brno</option>
-                                </optgroup>
-                                <optgroup label="Polonia">
-                                    <option value="Polonia – orice locație">Orice locație în Polonia</option>
-                                    <option value="Polonia – Varșovia">Varșovia</option>
-                                    <option value="Polonia – Cracovia">Cracovia</option>
-                                    <option value="Polonia – Wrocław">Wrocław</option>
-                                </optgroup>
-                                <optgroup label="Luxemburg">
-                                    <option value="Luxemburg – orice locație">Orice locație în Luxemburg</option>
-                                    <option value="Luxemburg – Luxembourg">Luxembourg</option>
-                                </optgroup>
-                                <optgroup label="Ungaria">
-                                    <option value="Ungaria – orice locație">Orice locație în Ungaria</option>
-                                    <option value="Ungaria – Budapesta">Budapesta</option>
-                                    <option value="Ungaria – Debrecen">Debrecen</option>
-                                </optgroup>
-                                <optgroup label="Austria">
-                                    <option value="Austria – orice locație">Orice locație în Austria</option>
-                                    <option value="Austria – Viena">Viena</option>
-                                    <option value="Austria – Graz">Graz</option>
-                                    <option value="Austria – Salzburg">Salzburg</option>
-                                </optgroup>
-                                <optgroup label="Slovacia">
-                                    <option value="Slovacia – orice locație">Orice locație în Slovacia</option>
-                                    <option value="Slovacia – Bratislava">Bratislava</option>
-                                    <option value="Slovacia – Košice">Košice</option>
-                                </optgroup>
-                            </select>
+                            <label for="plecare">Plecare <span class="form-required">*</span></label>
+                            <input type="text" id="plecare" name="plecare" required autocomplete="address-level2" placeholder="Ex: București, România / München, Germania / Amsterdam, Olanda">
                         </div>
                         <div class="form-group">
-                            <label for="destinatie">Destinație</label>
-                            <select id="destinatie" name="destinatie" required>
-                                <option value="">— Țară / oraș —</option>
-                                <optgroup label="România">
-                                    <option value="România – orice locație">Orice locație în România</option>
-                                    <option value="România – București">București</option>
-                                    <option value="România – Cluj-Napoca">Cluj-Napoca</option>
-                                    <option value="România – Timișoara">Timișoara</option>
-                                    <option value="România – Constanța">Constanța</option>
-                                    <option value="România – Sibiu">Sibiu</option>
-                                    <option value="România – Iași">Iași</option>
-                                </optgroup>
-                                <optgroup label="Germania">
-                                    <option value="Germania – orice locație">Orice locație în Germania</option>
-                                    <option value="Germania – Berlin">Berlin</option>
-                                    <option value="Germania – München">München</option>
-                                    <option value="Germania – Hamburg">Hamburg</option>
-                                    <option value="Germania – Frankfurt">Frankfurt</option>
-                                    <option value="Germania – Köln">Köln</option>
-                                    <option value="Germania – Stuttgart">Stuttgart</option>
-                                    <option value="Germania – Dresden">Dresden</option>
-                                </optgroup>
-                                <optgroup label="Austria">
-                                    <option value="Austria – orice locație">Orice locație în Austria</option>
-                                    <option value="Austria – Viena">Viena</option>
-                                    <option value="Austria – Graz">Graz</option>
-                                    <option value="Austria – Salzburg">Salzburg</option>
-                                </optgroup>
-                                <optgroup label="Franța">
-                                    <option value="Franța – orice locație">Orice locație în Franța</option>
-                                    <option value="Franța – Paris">Paris</option>
-                                    <option value="Franța – Lyon">Lyon</option>
-                                    <option value="Franța – Strasbourg">Strasbourg</option>
-                                    <option value="Franța – Marseille">Marseille</option>
-                                </optgroup>
-                                <optgroup label="Olanda">
-                                    <option value="Olanda – orice locație">Orice locație în Olanda</option>
-                                    <option value="Olanda – Amsterdam">Amsterdam</option>
-                                    <option value="Olanda – Rotterdam">Rotterdam</option>
-                                    <option value="Olanda – Utrecht">Utrecht</option>
-                                </optgroup>
-                                <optgroup label="Belgia">
-                                    <option value="Belgia – orice locație">Orice locație în Belgia</option>
-                                    <option value="Belgia – Bruxelles">Bruxelles</option>
-                                    <option value="Belgia – Anvers">Anvers</option>
-                                    <option value="Belgia – Gent">Gent</option>
-                                </optgroup>
-                                <optgroup label="Cehia">
-                                    <option value="Cehia – orice locație">Orice locație în Cehia</option>
-                                    <option value="Cehia – Praga">Praga</option>
-                                    <option value="Cehia – Brno">Brno</option>
-                                </optgroup>
-                                <optgroup label="Polonia">
-                                    <option value="Polonia – orice locație">Orice locație în Polonia</option>
-                                    <option value="Polonia – Varșovia">Varșovia</option>
-                                    <option value="Polonia – Cracovia">Cracovia</option>
-                                    <option value="Polonia – Wrocław">Wrocław</option>
-                                </optgroup>
-                                <optgroup label="Luxemburg">
-                                    <option value="Luxemburg – orice locație">Orice locație în Luxemburg</option>
-                                    <option value="Luxemburg – Luxembourg">Luxembourg</option>
-                                </optgroup>
-                                <optgroup label="Ungaria">
-                                    <option value="Ungaria – orice locație">Orice locație în Ungaria</option>
-                                    <option value="Ungaria – Budapesta">Budapesta</option>
-                                    <option value="Ungaria – Debrecen">Debrecen</option>
-                                </optgroup>
-                                <optgroup label="Slovacia">
-                                    <option value="Slovacia – orice locație">Orice locație în Slovacia</option>
-                                    <option value="Slovacia – Bratislava">Bratislava</option>
-                                    <option value="Slovacia – Košice">Košice</option>
-                                </optgroup>
-                            </select>
+                            <label for="destinatie">Destinație <span class="form-required">*</span></label>
+                            <input type="text" id="destinatie" name="destinatie" required autocomplete="address-level2" placeholder="Ex: Berlin, Germania / Paris, Franța / Viena, Austria / Cluj-Napoca, România">
                         </div>
                         <div class="form-group">
                             <label for="detalii_masina">Detalii mașină</label>
