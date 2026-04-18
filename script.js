@@ -234,7 +234,7 @@ function showSuccessMessage() {
     // Creează un mesaj de succes frumos
     const successDiv = document.createElement('div');
     successDiv.className = 'form-success-message';
-    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Oferta e pregătită! Deschideți aplicația de e-mail, verificați datele și apăsați „Trimite”. Răspundem în maxim 30 de minute.';
+    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Oferta e pregătită! Deschideți aplicația de e-mail, verificați datele și apăsați „Trimite”.';
     
     const form = document.getElementById('contactForm');
     form.parentNode.insertBefore(successDiv, form);
