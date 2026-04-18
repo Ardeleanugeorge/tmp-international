@@ -997,28 +997,87 @@ body {
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 20px;
+    padding: clamp(16px, 3vw, 22px);
     border-radius: 10px;
     border-left: 4px solid var(--primary-color);
     box-shadow: var(--shadow);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.ruta-group-head {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
 .ruta-city {
     color: var(--primary-color);
-    font-size: 1.3rem;
+    font-size: clamp(1.15rem, 3vw, 1.35rem);
     font-weight: 700;
-    margin-bottom: 15px;
+    margin: 0;
     text-align: center;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--bg-light);
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
+.ruta-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: var(--white);
+    font-size: clamp(0.88rem, 2.2vw, 0.98rem);
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.ruta-toggle-btn:hover {
+    background: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(26, 115, 232, 0.35);
+}
+
+.ruta-toggle-btn:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.ruta-toggle-icon {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.ruta-group.is-open .ruta-toggle-icon {
+    transform: rotate(180deg);
+}
+
 .ruta-list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
+    margin-top: 16px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ruta-list[hidden] {
+    display: none !important;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .ruta-item {
@@ -1598,7 +1657,8 @@ body {
     .cta-primary:hover,
     .cta-secondary:hover,
     .serviciu-toggle-btn:hover,
-    .serviciu-contact-link:hover {
+    .serviciu-contact-link:hover,
+    .ruta-toggle-btn:hover {
         transform: none;
     }
 }

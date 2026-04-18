@@ -9,7 +9,7 @@
     <title>TMP International - Transport Auto Romania-Germania-Romania | Tractari Auto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=2.4">
+    <link rel="stylesheet" href="styles.css?v=2.5">
 </head>
 <body>
     <!-- Hero Section with Video -->
@@ -284,8 +284,14 @@
             
             <div class="rute-grid">
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Dresden</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-dresden">Dresden</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-dresden">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-dresden" role="region" aria-labelledby="ruta-heading-dresden" hidden>
                         <div class="ruta-item">Bucuresti – Dresden</div>
                         <div class="ruta-item">Pitesti – Dresden</div>
                         <div class="ruta-item">Rm. Valcea – Dresden</div>
@@ -302,8 +308,14 @@
                 </div>
 
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Munchen</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-munchen">Munchen</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-munchen">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-munchen" role="region" aria-labelledby="ruta-heading-munchen" hidden>
                         <div class="ruta-item">Bucuresti – Munchen</div>
                         <div class="ruta-item">Pitesti – Munchen</div>
                         <div class="ruta-item">Rm. Valcea – Munchen</div>
@@ -320,8 +332,14 @@
                 </div>
 
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Stuttgart</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-stuttgart">Stuttgart</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-stuttgart">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-stuttgart" role="region" aria-labelledby="ruta-heading-stuttgart" hidden>
                         <div class="ruta-item">Bucuresti – Stuttgart</div>
                         <div class="ruta-item">Pitesti – Stuttgart</div>
                         <div class="ruta-item">Rm. Valcea – Stuttgart</div>
@@ -338,8 +356,14 @@
                 </div>
 
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Nuremberg</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-nuremberg">Nuremberg</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-nuremberg">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-nuremberg" role="region" aria-labelledby="ruta-heading-nuremberg" hidden>
                         <div class="ruta-item">Bucuresti – Nuremberg</div>
                         <div class="ruta-item">Pitesti – Nuremberg</div>
                         <div class="ruta-item">Rm. Valcea – Nuremberg</div>
@@ -356,8 +380,14 @@
                 </div>
 
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Frankfurt</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-frankfurt">Frankfurt</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-frankfurt">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-frankfurt" role="region" aria-labelledby="ruta-heading-frankfurt" hidden>
                         <div class="ruta-item">Bucuresti – Frankfurt</div>
                         <div class="ruta-item">Pitesti – Frankfurt</div>
                         <div class="ruta-item">Rm. Valcea – Frankfurt</div>
@@ -374,8 +404,14 @@
                 </div>
 
                 <div class="ruta-group">
-                    <h3 class="ruta-city">Koln</h3>
-                    <div class="ruta-list">
+                    <div class="ruta-group-head">
+                        <h3 class="ruta-city" id="ruta-heading-koln">Koln</h3>
+                        <button type="button" class="ruta-toggle-btn" aria-expanded="false" aria-controls="ruta-list-koln">
+                            <span class="ruta-toggle-label">Toate rutele</span>
+                            <i class="fas fa-chevron-down ruta-toggle-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="ruta-list" id="ruta-list-koln" role="region" aria-labelledby="ruta-heading-koln" hidden>
                         <div class="ruta-item">Bucuresti – Koln</div>
                         <div class="ruta-item">Pitesti – Koln</div>
                         <div class="ruta-item">Rm. Valcea – Koln</div>

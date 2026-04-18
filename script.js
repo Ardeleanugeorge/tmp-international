@@ -73,6 +73,32 @@ document.querySelectorAll('.serviciu-toggle-btn').forEach(function (btn) {
     });
 });
 
+// Rute: titlu + „Toate rutele”; lista apare la click (fiecare oraș independent)
+document.querySelectorAll('.ruta-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        var panelId = btn.getAttribute('aria-controls');
+        if (!panelId) return;
+        var panel = document.getElementById(panelId);
+        var group = btn.closest('.ruta-group');
+        if (!panel || !group) return;
+
+        var open = group.classList.contains('is-open');
+        var label = btn.querySelector('.ruta-toggle-label');
+
+        if (open) {
+            group.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+            panel.setAttribute('hidden', '');
+            if (label) label.textContent = 'Toate rutele';
+        } else {
+            group.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+            panel.removeAttribute('hidden');
+            if (label) label.textContent = 'Ascunde rutele';
+        }
+    });
+});
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
