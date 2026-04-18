@@ -179,6 +179,7 @@ if (contactForm) {
         const detaliiEl = document.getElementById('detalii_masina');
         const dataEl = document.getElementById('data_transport');
         const telEl = document.getElementById('telefon');
+        const emailEl = document.getElementById('email_contact');
         const mesajEl = document.getElementById('mesaj');
         const sunetEl = document.getElementById('sunet_rapid');
 
@@ -189,6 +190,7 @@ if (contactForm) {
             detalii_masina: detaliiEl ? detaliiEl.value.trim() : '',
             data_transport: dataEl ? dataEl.value : '',
             telefon: telEl ? telEl.value.trim() : '',
+            email: emailEl ? emailEl.value.trim() : '',
             mesaj: mesajEl ? mesajEl.value.trim() : '',
             sunet_rapid: sunetEl && sunetEl.checked ? 'Da' : 'Nu'
         };
@@ -206,6 +208,7 @@ if (contactForm) {
             `Detalii mașină: ${formData.detalii_masina || '—'}\n` +
             `Termen / dată: ${formData.data_transport}\n` +
             `Telefon: ${formData.telefon}\n` +
+            `Email client: ${formData.email}\n` +
             `Vreau să fiu sunat rapid: ${formData.sunet_rapid}\n\n` +
             `Mesaj (opțional):\n${formData.mesaj || '—'}`
         );
