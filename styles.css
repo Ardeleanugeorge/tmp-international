@@ -1077,115 +1077,47 @@ body {
 
 .rute-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: clamp(14px, 3vw, 22px);
 }
 
-.ruta-group {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: clamp(16px, 3vw, 22px);
-    border-radius: 10px;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+/* Carduri țări — decorative, fără acțiuni */
+.rute-tari-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.ruta-group-head {
+.tara-card {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-}
-
-.ruta-city {
-    color: var(--primary-color);
-    font-size: clamp(1.15rem, 3vw, 1.35rem);
-    font-weight: 700;
-    margin: 0;
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--bg-light);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.ruta-toggle-btn {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    width: 100%;
-    min-height: 46px;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 999px;
-    background: var(--primary-color);
-    color: var(--white);
-    font-size: clamp(0.88rem, 2.2vw, 0.98rem);
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
-    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-.ruta-toggle-btn:hover {
-    background: #1557b0;
-    transform: translateY(-1px);
-    box-shadow: 0 5px 16px rgba(26, 115, 232, 0.35);
-}
-
-.ruta-toggle-btn:focus-visible {
-    outline: 3px solid var(--secondary-color);
-    outline-offset: 2px;
-}
-
-.ruta-toggle-icon {
-    font-size: 0.75rem;
-    transition: transform 0.3s ease;
-}
-
-.ruta-group.is-open .ruta-toggle-icon {
-    transform: rotate(180deg);
-}
-
-.ruta-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 16px;
-    padding-top: 4px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.ruta-list[hidden] {
-    display: none !important;
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-
-.ruta-item {
-    padding: 10px;
-    background: rgba(245, 245, 245, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 5px;
-    font-size: 0.9rem;
-    color: var(--text-color);
     text-align: center;
-    transition: background 0.3s, color 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
-    font-weight: 500;
+    min-height: clamp(76px, 18vw, 104px);
+    padding: clamp(14px, 3.5vw, 22px) clamp(10px, 2.5vw, 16px);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(226, 238, 255, 0.82) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    color: var(--primary-color);
+    font-size: clamp(0.82rem, 2.4vw, 1.05rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: box-shadow 0.25s ease;
 }
 
-.ruta-item:hover {
-    background: rgba(26, 115, 232, 0.8);
-    color: var(--white);
+.tara-card:nth-child(even) {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(232, 245, 236, 0.78) 100%);
+    border-left-color: var(--secondary-color);
+}
+
+.tara-card:hover {
+    box-shadow: 0 6px 22px rgba(26, 115, 232, 0.15);
 }
 
 /* Contact Section */
@@ -1624,12 +1556,8 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .rute-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .ruta-list {
-        grid-template-columns: repeat(2, 1fr);
+    .rute-tari-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .contact-content {
@@ -1699,12 +1627,8 @@ body {
         height: 300px;
     }
 
-    .rute-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .ruta-list {
-        grid-template-columns: 1fr;
+    .rute-tari-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .stat-number {
@@ -1734,23 +1658,21 @@ body {
 
 .serviciu-card,
 .feature-box,
-.ruta-group {
+.tara-card {
     animation: fadeIn 0.6s ease-out;
 }
 
 /* Touch optimizations */
 @media (hover: none) and (pointer: coarse) {
     .serviciu-card:hover,
-    .feature-box:hover,
-    .ruta-item:hover {
+    .feature-box:hover {
         transform: none;
     }
 
     .cta-primary:hover,
     .cta-secondary:hover,
     .serviciu-toggle-btn:hover,
-    .serviciu-contact-link:hover,
-    .ruta-toggle-btn:hover {
+    .serviciu-contact-link:hover {
         transform: none;
     }
 }
