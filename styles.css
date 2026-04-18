@@ -633,6 +633,11 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
+.rute .section-subtitle {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
 .servicii-grid {
     display: grid;
     grid-template-columns: 1fr;
