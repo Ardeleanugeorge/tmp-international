@@ -183,7 +183,8 @@ if (scrollTopBtn) {
     });
 }
 
-// Contact Form Handling
+// Contact Form Handling — mesajele merg la acest email (mailto + același în index.html)
+const TMP_CONTACT_EMAIL = 'internationaltmp@gmail.com';
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
@@ -212,7 +213,7 @@ if (contactForm) {
         //     from_email: formData.email,
         //     phone: formData.telefon,
         //     message: formData.mesaj,
-        //     to_email: 'contact@tmp-international.ro'
+        //     to_email: TMP_CONTACT_EMAIL
         // })
         // .then(function() {
         //     showSuccessMessage();
@@ -222,7 +223,7 @@ if (contactForm) {
         // });
 
         // Opțiunea 2: Folosește mailto (metoda actuală - funcționează imediat)
-        const subject = encodeURIComponent('Contact de pe tmp-international.ro');
+        const subject = encodeURIComponent('Contact de pe site-ul TMP International');
         const body = encodeURIComponent(
             `Nume: ${formData.nume}\n` +
             `Telefon: ${formData.telefon}\n` +
@@ -232,8 +233,8 @@ if (contactForm) {
         
         // Simulează trimiterea (pentru UX mai bun)
         setTimeout(() => {
-            // Open email client
-            window.location.href = `mailto:contact@tmp-international.ro?subject=${subject}&body=${body}`;
+            // Deschide clientul de email cu destinatar TMP_CONTACT_EMAIL
+            window.location.href = `mailto:${TMP_CONTACT_EMAIL}?subject=${subject}&body=${body}`;
             
             // Show success message
             showSuccessMessage();
