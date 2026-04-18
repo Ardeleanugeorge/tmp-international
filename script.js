@@ -173,36 +173,41 @@ if (contactForm) {
         submitBtn.textContent = 'Se trimite...';
         submitBtn.style.opacity = '0.7';
         
-        // Get form data
+        const tipEl = document.getElementById('tip_transport');
+        const plecareEl = document.getElementById('plecare');
+        const destEl = document.getElementById('destinatie');
+        const detaliiEl = document.getElementById('detalii_masina');
+        const dataEl = document.getElementById('data_transport');
+        const telEl = document.getElementById('telefon');
+        const mesajEl = document.getElementById('mesaj');
+        const sunetEl = document.getElementById('sunet_rapid');
+
         const formData = {
-            nume: document.getElementById('nume').value,
-            telefon: document.getElementById('telefon').value,
-            email: document.getElementById('email').value,
-            mesaj: document.getElementById('mesaj').value
+            tip_transport: tipEl ? tipEl.value : '',
+            plecare: plecareEl ? plecareEl.value : '',
+            destinatie: destEl ? destEl.value : '',
+            detalii_masina: detaliiEl ? detaliiEl.value.trim() : '',
+            data_transport: dataEl ? dataEl.value : '',
+            telefon: telEl ? telEl.value.trim() : '',
+            mesaj: mesajEl ? mesajEl.value.trim() : '',
+            sunet_rapid: sunetEl && sunetEl.checked ? 'Da' : 'Nu'
         };
 
         // Opțiunea 1: Folosește EmailJS (necesită cont gratuit la emailjs.com)
-        // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-        //     from_name: formData.nume,
-        //     from_email: formData.email,
-        //     phone: formData.telefon,
-        //     message: formData.mesaj,
-        //     to_email: TMP_CONTACT_EMAIL
-        // })
-        // .then(function() {
-        //     showSuccessMessage();
-        //     contactForm.reset();
-        // }, function(error) {
-        //     showErrorMessage();
-        // });
+        // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { ... to_email: TMP_CONTACT_EMAIL })
 
-        // Opțiunea 2: Folosește mailto (metoda actuală - funcționează imediat)
-        const subject = encodeURIComponent('Contact de pe site-ul TMP International');
+        // mailto — clientul trimite manual din aplicația de email
+        const subject = encodeURIComponent('Cerere ofertă transport auto — TMP International');
         const body = encodeURIComponent(
-            `Nume: ${formData.nume}\n` +
+            `CERERE OFERTĂ TRANSPORT AUTO\n\n` +
+            `Tip transport: ${formData.tip_transport}\n` +
+            `Plecare: ${formData.plecare}\n` +
+            `Destinație: ${formData.destinatie}\n` +
+            `Detalii mașină: ${formData.detalii_masina || '—'}\n` +
+            `Termen / dată: ${formData.data_transport}\n` +
             `Telefon: ${formData.telefon}\n` +
-            `Email: ${formData.email}\n\n` +
-            `Mesaj:\n${formData.mesaj}`
+            `Vreau să fiu sunat rapid: ${formData.sunet_rapid}\n\n` +
+            `Mesaj (opțional):\n${formData.mesaj || '—'}`
         );
         
         // Simulează trimiterea (pentru UX mai bun)
@@ -229,7 +234,7 @@ function showSuccessMessage() {
     // Creează un mesaj de succes frumos
     const successDiv = document.createElement('div');
     successDiv.className = 'form-success-message';
-    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Mesajul a fost trimis cu succes! Veți primi un răspuns în cel mai scurt timp.';
+    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Oferta e pregătită! Deschideți aplicația de e-mail, verificați datele și apăsați „Trimite”. Răspundem în maxim 30 de minute.';
     
     const form = document.getElementById('contactForm');
     form.parentNode.insertBefore(successDiv, form);
