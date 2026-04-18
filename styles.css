@@ -548,6 +548,12 @@ body {
     z-index: 1;
 }
 
+.servicii .container {
+    max-width: min(1520px, 100%);
+    padding-left: clamp(12px, 3vw, 36px);
+    padding-right: clamp(12px, 3vw, 36px);
+}
+
 .section-title {
     text-align: center;
     font-size: 1.8rem;
@@ -655,19 +661,21 @@ body {
 .serviciu-image {
     width: 100%;
     flex-shrink: 0;
-    height: clamp(220px, 52vw, 460px);
-    min-height: 220px;
-    overflow: hidden;
+    position: relative;
     margin: 0;
     border-radius: 0;
-    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 1;
+    max-height: min(300px, 42vw);
 }
 
 .serviciu-image img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center center;
     display: block;
     transition: transform 0.45s ease;
 }
@@ -1617,6 +1625,10 @@ body {
 
     .servicii-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .serviciu-image {
+        max-height: min(340px, 30vw);
     }
 
     .features-layout {
