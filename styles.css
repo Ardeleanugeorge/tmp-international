@@ -1342,6 +1342,8 @@ body {
     width: 100%;
     transition: background 0.3s, transform 0.3s;
     -webkit-tap-highlight-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .submit-btn:hover,
