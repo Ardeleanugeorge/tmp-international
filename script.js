@@ -33,6 +33,46 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Servicii: 2 rânduri preview + „Show more” / „Show less” (accordion — un panou deschis)
+document.querySelectorAll('.serviciu-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        var panelId = btn.getAttribute('aria-controls');
+        if (!panelId) return;
+        var panel = document.getElementById(panelId);
+        var card = btn.closest('.serviciu-card');
+        if (!panel || !card) return;
+
+        var expanding = !card.classList.contains('is-open');
+
+        document.querySelectorAll('.serviciu-card.is-open').forEach(function (c) {
+            if (c === card) return;
+            c.classList.remove('is-open');
+            var ob = c.querySelector('.serviciu-toggle-btn');
+            var op = ob && document.getElementById(ob.getAttribute('aria-controls'));
+            if (ob) {
+                ob.setAttribute('aria-expanded', 'false');
+                var lb = ob.querySelector('.serviciu-toggle-label');
+                if (lb) lb.textContent = 'Show more';
+            }
+            if (op) op.setAttribute('hidden', '');
+        });
+
+        if (expanding) {
+            card.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+            panel.removeAttribute('hidden');
+            var label = btn.querySelector('.serviciu-toggle-label');
+            if (label) label.textContent = 'Show less';
+        } else {
+            card.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+            panel.setAttribute('hidden', '');
+            var labelClose = btn.querySelector('.serviciu-toggle-label');
+            if (labelClose) labelClose.textContent = 'Show more';
+        }
+    });
+});
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
