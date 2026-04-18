@@ -432,16 +432,6 @@ body {
     letter-spacing: 0.04em;
 }
 
-.hero-title-sec {
-    display: block;
-    margin-top: 0.5em;
-    font-size: 0.58em;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.35;
-    text-transform: none;
-}
-
 .hero-subtitle {
     font-size: 1rem;
     margin-bottom: 25px;
