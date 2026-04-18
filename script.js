@@ -197,9 +197,9 @@ if (contactForm) {
         // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { ... to_email: TMP_CONTACT_EMAIL })
 
         // mailto — clientul trimite manual din aplicația de email
-        const subject = encodeURIComponent('Cerere ofertă transport auto — TMP International');
+        const subject = encodeURIComponent('Solicitare cotație de preț — TMP International');
         const body = encodeURIComponent(
-            `CERERE OFERTĂ TRANSPORT AUTO\n\n` +
+            `SOLICITARE COTAȚIE DE PREȚ\n\n` +
             `Tip transport: ${formData.tip_transport}\n` +
             `Plecare: ${formData.plecare}\n` +
             `Destinație: ${formData.destinatie}\n` +
