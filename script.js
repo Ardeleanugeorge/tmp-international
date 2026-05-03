@@ -161,18 +161,34 @@ if (scrollTopBtn) {
 const TMP_CONTACT_EMAIL = 'internationaltmp@gmail.com';
 const contactForm = document.getElementById('contactForm');
 
+function openQuoteMailto(formData) {
+    const subject = encodeURIComponent('Solicitare cotație de preț — TMP International');
+    const body = encodeURIComponent(
+        `SOLICITARE COTAȚIE DE PREȚ\n\n` +
+        `Tip transport: ${formData.tip_transport}\n` +
+        `Plecare: ${formData.plecare}\n` +
+        `Destinație: ${formData.destinatie}\n` +
+        `Detalii mașină: ${formData.detalii_masina || '—'}\n` +
+        `Termen / dată: ${formData.data_transport}\n` +
+        `Telefon: ${formData.telefon}\n` +
+        `Email client: ${formData.email}\n` +
+        `Vreau să fiu sunat rapid: ${formData.sunet_rapid}\n\n` +
+        `Mesaj (opțional):\n${formData.mesaj || '—'}`
+    );
+    window.location.href = `mailto:${TMP_CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+}
+
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
         const submitBtn = contactForm.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
-        
-        // Disable button și arată loading
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Se trimite...';
         submitBtn.style.opacity = '0.7';
-        
+
         const tipEl = document.getElementById('tip_transport');
         const plecareEl = document.getElementById('plecare');
         const destEl = document.getElementById('destinatie');
@@ -195,49 +211,56 @@ if (contactForm) {
             sunet_rapid: sunetEl && sunetEl.checked ? 'Da' : 'Nu'
         };
 
-        // Opțiunea 1: Folosește EmailJS (necesită cont gratuit la emailjs.com)
-        // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { ... to_email: TMP_CONTACT_EMAIL })
-
-        // mailto — clientul trimite manual din aplicația de email
-        const subject = encodeURIComponent('Solicitare cotație de preț — TMP International');
-        const body = encodeURIComponent(
-            `SOLICITARE COTAȚIE DE PREȚ\n\n` +
-            `Tip transport: ${formData.tip_transport}\n` +
-            `Plecare: ${formData.plecare}\n` +
-            `Destinație: ${formData.destinatie}\n` +
-            `Detalii mașină: ${formData.detalii_masina || '—'}\n` +
-            `Termen / dată: ${formData.data_transport}\n` +
-            `Telefon: ${formData.telefon}\n` +
-            `Email client: ${formData.email}\n` +
-            `Vreau să fiu sunat rapid: ${formData.sunet_rapid}\n\n` +
-            `Mesaj (opțional):\n${formData.mesaj || '—'}`
-        );
-        
-        // Simulează trimiterea (pentru UX mai bun)
-        setTimeout(() => {
-            // Deschide clientul de email cu destinatar TMP_CONTACT_EMAIL
-            window.location.href = `mailto:${TMP_CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-            
-            // Show success message
-            showSuccessMessage();
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Re-enable button
+        const finish = () => {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
             submitBtn.style.opacity = '1';
-        }, 500);
+        };
+
+        try {
+            const res = await fetch('/api/send-quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const json = await res.json().catch(function() { return {}; });
+
+            if (res.ok && json.ok) {
+                showSuccessMessage('direct');
+                contactForm.reset();
+                finish();
+                return;
+            }
+
+            // Server neconfigurat sau indisponibil: rezervă mailto
+            if (res.status === 503 || res.status === 404) {
+                openQuoteMailto(formData);
+                showSuccessMessage('mailto');
+                contactForm.reset();
+                finish();
+                return;
+            }
+
+            showErrorMessage(json.error || null);
+        } catch (err) {
+            openQuoteMailto(formData);
+            showSuccessMessage('mailto');
+            contactForm.reset();
+        }
+
+        finish();
     });
 }
 
-// Funcție pentru mesaj de succes
-function showSuccessMessage() {
-    // Creează un mesaj de succes frumos
+// Funcție pentru mesaj de succes (direct = SendGrid; mailto = client email)
+function showSuccessMessage(mode) {
     const successDiv = document.createElement('div');
     successDiv.className = 'form-success-message';
-    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Oferta e pregătită! Deschideți aplicația de e-mail, verificați datele și apăsați „Trimite”.';
+    if (mode === 'direct') {
+        successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Cererea a fost trimisă. Vă revenim în curând la datele indicate.';
+    } else {
+        successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Am deschis aplicația de e-mail cu mesajul. Verificați datele și apăsați „Trimite” acolo.';
+    }
     
     const form = document.getElementById('contactForm');
     form.parentNode.insertBefore(successDiv, form);
@@ -258,11 +281,20 @@ function showSuccessMessage() {
     }, 5000);
 }
 
-// Funcție pentru mesaj de eroare
-function showErrorMessage() {
+function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.textContent = text;
+    return d.innerHTML;
+}
+
+// Funcție pentru mesaj de eroare (opțional: mesaj de la server)
+function showErrorMessage(serverMessage) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'form-error-message';
-    errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct la telefon.';
+    const base = serverMessage
+        ? serverMessage
+        : 'A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct la telefon.';
+    errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + escapeHtml(base);
     
     const form = document.getElementById('contactForm');
     form.parentNode.insertBefore(errorDiv, form);
